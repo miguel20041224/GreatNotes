@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GreatNotes</string>
+
+    <!-- Library -->
+    <string name="library_title">My notebooks</string>
+    <string name="library_loading">Loading notebooks</string>
+    <string name="library_new_notebook">New notebook</string>
+    <string name="library_open_notebook">Open notebook</string>
+    <plurals name="library_page_count">
+        <item quantity="one">%d page</item>
+        <item quantity="other">%d pages</item>
+    </plurals>
+    <string name="library_error_load">Could not load your notebooks.</string>
+    <string name="library_error_create">Could not create the notebook. Please try again.</string>
+
+    <!-- Empty state -->
+    <string name="empty_library_title">Your shelf is empty</string>
+    <string name="empty_library_body">Create your first notebook and start writing with your stylus.</string>
+    <string name="empty_library_action">Create your first notebook</string>
+
+    <!-- Create sheet -->
+    <string name="create_sheet_title">New notebook</string>
+    <string name="create_sheet_name_label">Title</string>
+    <string name="create_sheet_name_counter">%1$d / %2$d</string>
+    <string name="create_sheet_name_blank">Title cannot be blank</string>
+    <string name="create_sheet_name_too_long">Title is too long</string>
+    <string name="create_sheet_cover_section">Cover</string>
+    <string name="create_sheet_color_section">Color</string>
+    <string name="create_sheet_paper_section">Paper</string>
+    <string name="create_sheet_confirm">Create</string>
+    <string name="create_sheet_cancel">Cancel</string>
+
+    <!-- Cover styles -->
+    <string name="cover_style_plain">Plain</string>
+    <string name="cover_style_leather">Leather</string>
+    <string name="cover_style_linen">Linen</string>
+    <string name="cover_style_gradient">Gradient</string>
+
+    <!-- Cover colors -->
+    <string name="color_blue">Blue</string>
+    <string name="color_red">Red</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_green">Green</string>
+    <string name="color_teal">Teal</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_pink">Pink</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_slate">Slate</string>
+    <string name="color_black">Black</string>
+
+    <!-- Page templates -->
+    <string name="template_blank">Blank</string>
+    <string name="template_lined">Lined</string>
+    <string name="template_grid">Grid</string>
+    <string name="template_dotted">Dotted</string>
+</resources>
