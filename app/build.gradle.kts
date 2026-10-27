@@ -11,6 +11,7 @@ plugins {
 android {
     namespace = "com.greatnotes"
     compileSdk = 36
+    buildToolsVersion = "37.0.0"
 
     defaultConfig {
         applicationId = "com.greatnotes"
@@ -71,6 +72,12 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    implementation(libs.androidx.ink.authoring)
+    implementation(libs.androidx.ink.authoring.compose)
+    implementation(libs.androidx.ink.brush)
+    implementation(libs.androidx.ink.strokes)
+    implementation(libs.androidx.ink.rendering)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
