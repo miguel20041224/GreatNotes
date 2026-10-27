@@ -1,0 +1,69 @@
+===============================================================================
+GREATNOTES - HANDOFF DE CONTEXTO DE SESIÓN (FASE 3 - INFRAESTRUCTURA INK)
+===============================================================================
+FECHA: 26 de Octubre de 2026
+AUTOR: Equipo GreatNotes
+ESTADO DE LA RAMA: main (listo para pull)
+
+-------------------------------------------------------------------------------
+1. OBJETIVO DEL PROYECTO & ARQUITECTURA
+-------------------------------------------------------------------------------
+- Proyecto: App Android para tablet "GreatNotes" con renderizado de tinta de alta
+  precisión y baja latencia.
+- Metodología: TDD estricto, separación limpia de capas de arquitectura.
+- Stack Principal: Kotlin, Jetpack Compose, Room, androidx.ink (v1.0.0).
+- Modelo de Renderizado de 3 Niveles:
+  1. Fondo / Plantillas (Caché).
+  2. Historial de Trazos Confirmados (Committed Bitmap).
+  3. Trazo Activo / Front-buffered (Live Layer).
+- Regla de Dominio: La lógica en `domain/` permanece en Kotlin puro, sin 
+  dependencias directas de Android ni de `androidx.ink`.
+
+-------------------------------------------------------------------------------
+2. PROGRESOS REALIZADOS EN ESTA SESIÓN (FASE 3)
+-------------------------------------------------------------------------------
+- Compatibilidad de Entorno:
+  * Verificada compatibilidad de androidx.ink 1.0.0 con minSdk 26 
+    (processDebugManifest verificado exitosamente).
+  * buildToolsVersion actualizado temporalmente a "37.0.0" en app/build.gradle.kts.
+  * JDK requerido para Gradle/AGP: JDK 17 (java-17-openjdk).
+
+- Lógica Implementada en `domain/ink/`:
+  1. StrokeSmoother: Suavizado mediante media móvil ponderada. Preserva el 
+     primer punto para mantener la baja latencia táctil.
+  2. CanvasCommand / StrokeHistory: Patrón Command implementado para soporte 
+     robusto de Deshacer / Rehacer (Undo / Redo).
+
+- Estado de Pruebas (TDD Integrity):
+  * Total de tests ejecutados: 46 (24 heredados de fases anteriores + 22 nuevos de la Fase 3).
+  * Estado: 100 0REEN (Pasando en ./gradlew check y ./gradlew test).
+  * Verificación de Inyección de Fallos (Mutation Testing):
+    - Se forzaron errores controlados para confirmar que los tests fallan (RED)
+      cuando la lógica se rompe:
+      * Al fallar la preservación del primer punto en StrokeSmoother, fallan 6/10 tests.
+      * Al fallar la restauración de trazos en StrokeHistory, fallan 2/12 tests.
+
+-------------------------------------------------------------------------------
+3. INSTRUCCIONES DE CONFIGURACIÓN PARA EL PC DE MESA
+-------------------------------------------------------------------------------
+Al llegar al PC de mesa y hacer `git pull`, ejecutar los siguientes pasos:
+
+1. Asegurar JDK 17 activo para Gradle:
+   $ set -x JAVA_HOME /usr/lib/jvm/java-17-openjdk
+
+2. Configurar el SDK de Android en local.properties (si no existe):
+   $ echo "sdk.dir=/ruta/a/tu/android-sdk" > local.properties
+
+3. Ejecutar verificación de suite completa:
+   $ ./gradlew check
+
+-------------------------------------------------------------------------------
+4. PRÓXIMOS PASOS PENDIENTES (SIGUIENTE TRAMO DE LA FASE 3)
+-------------------------------------------------------------------------------
+1. Curva de Presión y Estilizado (Pressure Curve / Styling):
+   - Mapeo dinámico de presión/velocidad del stylus al grosor del trazo.
+2. Hit-Testing para el Borrador (Stroke & Segment Eraser):
+   - Algoritmo para detección de colisión y borrado de trazo completo o por segmentos.
+3. Pruebas directas en hardware real (Tablet) para evaluar la latencia V29/V33 
+   usando CanvasFrontBufferedRenderer.
+===============================================================================
